@@ -49,10 +49,10 @@ app.get('/', (req, res) => {
   const sql = "select * from db_test"
   conn.query(sql, (err, row) => {
       let a = row.map((element) => {
-        return `<div style="width:30vw; height: 50px; font-size: 40px; color: skyblue;">${element.name}</div>
-        <div style="width:50vw; height: 50px;">${element.title}</div>
+        return `<div style="width:30vw; height: 50px; font-size: 40px; color: skyblue;"><a href="http://localhost:${port}/page">${element.title}</a></div>
+        <div style="width:50vw; height: 50px;">${element.name}</div>
         `
-      })
+      }).join("")
       console.log(a)
     res.send(`<!DOCTYPE html>
     <html lang="en">
@@ -73,6 +73,25 @@ app.get('/', (req, res) => {
     </html>`)
   })
 })
+
+app.get('/page', (req, res) => {
+  const sql = "select * from db_test"
+  conn.query(sql,(err, row) => {
+    
+  res.send(`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+  </body>
+  </html>`)
+})
+})
+
 
 //app.get('/about', (req, res)=> {
 //  const sql = "select * from db_test";
