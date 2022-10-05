@@ -1,0 +1,83 @@
+#root{
+  width: 1440px;
+  height: 1024px;
+}
+
+#root > header{
+  width: 1440px;
+  height: 100px;
+  background-color: #B9AEAE;
+  display: flex;
+  align-items: center;
+}
+
+#root > header > .logo > .img{
+  width: 60px;
+  height: 60px;
+  margin: 15px;
+}
+
+#root > main{
+  width: 1440px;
+  height: 924px;
+  display: flex;
+}
+
+#root > main > div{
+  width: 50%;
+  height: 100%;
+}
+
+#root > main > div > #imgSector{
+  width: 100%;
+  height: 665px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root > main > div > #imgSector > #img{
+  width: 445px;
+  height: 445px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root > main > div > #buttonPage{
+  width: 100%;
+  height: 258px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root >main > div > #buttonPage > button{
+  width: 245px;
+  height: 50px;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+#root > main > div > #inputAlpha{
+  width: 500px;
+  height: 70px;
+  margin-left: 100px;
+}
+
+#root > main > div > #inputBeta{
+  width: 500px;
+  height: 335px;
+  margin-left: 100px;
+}
+
+#root > main > div > #inputAlpha > .submitAlpha{
+  width: 465px;
+  height: 30px;
+}
+
+#root > main > div > #inputBeta > .submitBeta{
+  width: 465px;
+  height: 285px;
+}
