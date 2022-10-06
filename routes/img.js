@@ -12,7 +12,7 @@ fs.readdir('uploads', (err)=>{
 })
 
 const upload = multer({
-    storage: multer.diskStorage({
+    storage: multer.memoryStorage({
         destination(req, file, cb){
             cb(null, 'uploads/');
         },
