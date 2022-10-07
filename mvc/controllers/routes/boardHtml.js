@@ -1,25 +1,5 @@
-const express = require('express')
-const router = express.Router()
-const mysql = require('mysql');
-
-const con = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password : 'kdt305',
-  database : 'project_c'
-})
-
-router.get('/', (req, res) => {
-  const sql = 'select * from missingboard'
-  con.query(sql, req.body, (err, row) => {
-    if(err) throw err;
-    let a = row.map((element) => {
-      return `<div id=list>
-        <div id=text>[${element.location}] ${element.kind} ${element.gender}</div>
-      </div>`
-    }).join("")
-    console.log(a)
-    res.send(`<!DOCTYPE html>
+const boardHtml = (a) => {
+  return `<!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
@@ -81,8 +61,7 @@ router.get('/', (req, res) => {
         </main>
       </div>
     </body>
-    </html>`)
-  })
-})
+    </html>`
+}
 
-module.exports = router;
+module.exports = boardHtml;

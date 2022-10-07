@@ -3,6 +3,7 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 const port = 8000;
+const path = require('path')
 
 const con = mysql.createConnection({
   host : 'localhost',
@@ -11,15 +12,12 @@ const con = mysql.createConnection({
   database : 'project_c'
 })
 
-const boardRouter = require("./router/board")
-const abandonedRouter = require("./router/abandonedBoard")
+const boardRouter = require("../controllers/routes/board")
+const abandonedRouter = require("../controllers/routes/abandonedBoard")
 
 //? html에 css스타일 연결
-function static(set, midle){
-  app.use(set, express.static(midle))
-}
-static('/', './css')
-static('/', './image')
+app.use('/', express.static(__dirname + "../../views"))
+app.use('/', express.static(__dirname + "../../public"))
 
 //! 함수생성
 function getting(port, file){
@@ -28,10 +26,13 @@ function getting(port, file){
   })
 }
 //? 글쓰기 페이지
-getting('/createboard', '/createboard.html')
+app.get('/createboard', (req, res) => {
+  res.sendFile(path.join(__dirname + "../../views/createboard.html"))
+})
 //? 세부 내용
-getting('/detail', '/detail.html')
-
+app.get('/detail', (req, res) => {
+  res.sendFile(path.join(__dirname + "../../views/detail.html"))
+})
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 //? DB에 데이터 저장
