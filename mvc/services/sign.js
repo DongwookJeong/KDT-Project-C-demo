@@ -51,7 +51,7 @@ app.post('/',(req,res)=>{
 //       })
       
 app.get("/login",function(req,res){
-  res.sendFile(path.join(__dirname,"login.html"))
+  res.sendFile(path.join(__dirname, "..", "views" ,"login.html"))
 })
 
 app.post("/login",function(req,res){
@@ -72,7 +72,7 @@ app.post("/login",function(req,res){
     });
 
     if(islogin){
-      res.sendFile(path.join(__dirname,"login2.html"))
+      res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
     }else{
       console.log(err)
     }
