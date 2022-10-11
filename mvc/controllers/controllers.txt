@@ -1,0 +1,6 @@
+routes에서 쓰이는 함수를 정의 하는 곳
+처리한 데이터를 뷰로 연결
+
+abandonedboard와 abandonedHtml은 추후 유기동물 api 추가시 데이터를 집어넣을 떄 사용할 페이지
+
+board와 boardHtml은 현제 잃어버린 동물을 찾기위한 데이터를 집어넣을 게시판 페이지
