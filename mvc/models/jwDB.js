@@ -5,3 +5,6 @@ const connection = mysql.createConnection({
   password:'rzo01042218221@',
   database:'node.js'
 })
+const db = {...connection}
+
+module.exports = db
