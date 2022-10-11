@@ -1,8 +1,10 @@
 const express = require("express")
+const crypto = require("crypto")
 const app = express()
 const mysql = require('mysql')
 const path = require("path")
 const bodyParser = require("body-parser")
+const { copyFileSync } = require("fs")
 const connection = mysql.createConnection({
   host :'localhost',
   port : "3306",
@@ -11,7 +13,7 @@ const connection = mysql.createConnection({
   database:'node.js'
 })
 
-
+let salt = 3.14102938
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
@@ -32,7 +34,18 @@ app.post('/',(req,res)=>{
   let address = body.address;
   let phone = body.phone;
   
-  connection.query(`insert into user(id,name,address,phone,password) values(${id},"${name}","${address}","${phone}","${password}");`, (err)=>{
+  // function hashJuwan(pw){
+  
+  // console.log(typeof(pww))
+  // return pww
+  // }
+
+
+  let saltPw =  "" + password * salt
+  let hashPassword = crypto.createHash("sha512").update(saltPw).digest('base64')
+
+  console.log(hashPassword)
+  connection.query(`insert into user(id,name,address,phone,password) values(${id},"${name}","${address}","${phone}","${hashPassword}");`, (err)=>{
     if(err){
       console.error(err);
     }
@@ -57,6 +70,11 @@ app.get("/login",function(req,res){
 app.post("/login",function(req,res){
   let sql ="select * from user;"
   let body = req.body;
+  let password = body.password
+
+  let saltPw =  "" + password * salt
+  let hashPassword = crypto.createHash("sha512").update(saltPw).digest('base64')
+
 
   connection.query(sql,(err,result)=>{
   let islogin = false;
@@ -66,18 +84,25 @@ app.post("/login",function(req,res){
     }
     console.log(body)
     result.forEach((item) => {
-      if(item.id === Number(body.id) && item.password === body.password){
+      if(item.id == Number(body.id) && item.password == hashPassword){
         islogin = true
       }
     });
 
     if(islogin){
       res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
+      // res.send("hi")
     }else{
       console.log(err)
     }
   })
 })
+
+// app.get("/users", (req, res)=>{
+//   connection.query("select * from user;", (err, results)=>{
+//   res.send(results)
+//   })
+// })
 
 app.listen(8000, ()=>{
   console.log("http://localhost:8000/")
