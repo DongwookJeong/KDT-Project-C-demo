@@ -2,7 +2,5 @@ node_modules
 package-lock.json
 package.json
 key.js
-jhDB.js
-jwDB.js
-jjwDB.js
+models/
 
