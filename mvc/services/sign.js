@@ -7,6 +7,7 @@ const bodyParser = require("body-parser")
 const { copyFileSync } = require("fs")
 const connection = require("../models/jw.js")
 const db = mysql.createConnection(connection)
+
 let salt = 3.14102938
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));

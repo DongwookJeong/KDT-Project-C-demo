@@ -5,13 +5,14 @@ const app = express();
 const port = 8000;
 const path = require('path')
 const multer = require('multer')
-
-const con = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password : 'kdt305',
-  database : 'project_c'
-})
+const connection = require("../models/jjw.js")
+const db = mysql.createConnection(connection)
+// const con = mysql.createConnection({
+//   host : 'localhost',
+//   user : 'root',
+//   password : 'rjeek55%',
+//   database : 'login'
+// })
 /**
  * * destination의 경우 저장된 file이 들어가는 폴더 지정
  * * filename의 경우 저장될 파일의 이름 지정
@@ -70,7 +71,7 @@ app.post('/', upload.single("image"), (req, res) => {
   let matters = req.body.matters;
   let image = req.file.filename;
   let param = [animal, kind, gender, age, neutering, location, matters, image]
-  con.query(sql, param, (err, row) => {
+  db.query(sql, param, (err, row) => {
     if(err) throw err;
     console.log(row)
     res.send("완료")
