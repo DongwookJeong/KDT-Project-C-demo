@@ -141,7 +141,6 @@ app.post("/idFind", (req,res)=>{
       res.send(`아이디는 ${idResult[0]}입니다.`)
   })
 })
-})
 
 app.listen(8000, ()=>{
   console.log("http://localhost:8000/")
