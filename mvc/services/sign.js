@@ -1,7 +1,6 @@
 const express = require("express")
 const crypto = require("crypto")
 const app = express()
-const crypto = require("crypto")
 const mysql = require('mysql')
 const path = require("path")
 const bodyParser = require("body-parser")
@@ -25,14 +24,6 @@ app.get('/',function(req , res){
   res.sendFile(path.join(__dirname , "..", "views" ,"sign.html"))
 })
 
-// function hashJuwan(pw){
-// let salt = Math.random()
-// let abc =  "" + pw * salt
-// crypto.createHash("sha512").update(abc).digest('base64')
-// console.log(password)
-// }
-// hashJuwan(1234)
-
 app.post('/',(req,res)=>{
   
   let body = req.body;
@@ -43,13 +34,6 @@ app.post('/',(req,res)=>{
   let address = body.address;
   let phone = body.phone;
   
-<<<<<<< HEAD
-  let salt = Math.random()
-  
-  crypto.createHash("sha512").update(abc).digest('base64')
-  
-  connection.query(`insert into user(id,name,address,phone,password) values(${id},"${name}","${address}","${phone}","${password}");`, (err)=>{
-=======
   // function hashJuwan(pw){
   
   // console.log(typeof(pww))
@@ -62,12 +46,10 @@ app.post('/',(req,res)=>{
 
   console.log(hashPassword)
   connection.query(`insert into user(id,name,address,phone,password) values(${id},"${name}","${address}","${phone}","${hashPassword}");`, (err)=>{
->>>>>>> 531f800e1385164faeb73f81f71c7370d83ede67
     if(err){
       console.error(err);
     }
   })
-  
   res.redirect("/login")
 })
 
@@ -82,11 +64,7 @@ app.post('/',(req,res)=>{
 //       })
       
 app.get("/login",function(req,res){
-<<<<<<< HEAD
-  res.sendFile(path.join(__dirname,"..","views","login.html"))
-=======
   res.sendFile(path.join(__dirname, "..", "views" ,"login.html"))
->>>>>>> 531f800e1385164faeb73f81f71c7370d83ede67
 })
 
 app.post("/login",function(req,res){
@@ -112,23 +90,48 @@ app.post("/login",function(req,res){
     });
 
     if(islogin){
-<<<<<<< HEAD
-      res.sendFile(path.join(__dirname,"..","views","login2.html"))
-=======
-      res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
-      // res.send("hi")
->>>>>>> 531f800e1385164faeb73f81f71c7370d83ede67
+      // res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
+      res.redirect("users")
+    }else{
+      console.log(err)
+    }
+  })
+})
+app.get("/idfind",function(req,res){
+  res.sendFile(path.join(__dirname,"..","views","idfind.html"))
+})
+
+app.post("/idfind",function(req,res){
+  let body = req.body;
+  connection.query("select * from user;",(err,results)=>{
+    let idfinds = false
+    if(err){
+      console.log(err)
+    }
+    console.log(body)
+    results.forEach((items)=>{
+      if(items.name == body.name && items.phone == body.phone){
+        idfinds = true
+      }
+    })
+    if(idfinds){
+      res.redirect("users")
     }else{
       console.log(err)
     }
   })
 })
 
-// app.get("/users", (req, res)=>{
-//   connection.query("select * from user;", (err, results)=>{
-//   res.send(results)
-//   })
-// })
+  
+app.get("/users", (req, res)=>{
+  let body = req.body
+  connection.query("select id from user;", (err, results)=>{
+    results.forEach((items)=>{
+      if(items.name == body.name && items.phone == body.phone){
+      res.send(results)
+      }
+  })
+})
 
 app.listen(8000, ()=>{
   console.log("http://localhost:8000/")
