@@ -17,7 +17,7 @@ const abandonedHtml = (a) => {
             </a>
           </div>
           <div class="name">
-            <div>유기 동물 개시판</div>
+            <div>유기 동물 게시판</div>
           </div>
           <div class="login">
             <a href="">

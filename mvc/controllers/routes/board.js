@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
     if(err) throw err;
     let a = row.map((element) => {
       return `<div id=list>
+        <img src="${element.image}" style="width:250px; height:350px;position:relative;">
         <div id=text>[${element.location}] ${element.kind} ${element.gender}</div>
       </div>`
     }).join("")

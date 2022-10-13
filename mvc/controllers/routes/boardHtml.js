@@ -17,7 +17,7 @@ const boardHtml = (a) => {
             </a>
           </div>
           <div class="name">
-            <div>실종 동물 개시판</div>
+            <div>실종 동물 게시판</div>
           </div>
           <div class="login">
             <a href="">
