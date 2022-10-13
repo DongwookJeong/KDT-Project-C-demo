@@ -1,9 +1,9 @@
 const connection = {
-  host :'localhost',
-  port : "3306",
+  host :'127.0.0.1',
+  port : "3333",
   user: 'root',
-  password:'rzo01042218221@',
-  database:'node.js'
+  password:'rjeek55%',
+  database:'login'
 }
 
 const db = {...connection}

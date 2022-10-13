@@ -4,13 +4,14 @@ const mysql = require('mysql');
 const app = express();
 const port = 8000;
 const path = require('path')
-
-const con = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password : 'kdt305',
-  database : 'project_c'
-})
+const connection = require("../models/jjw.js")
+const db = mysql.createConnection(connection)
+// const con = mysql.createConnection({
+//   host : 'localhost',
+//   user : 'root',
+//   password : 'kdt305',
+//   database : 'project_c'
+// })
 
 const boardRouter = require("../controllers/routes/board")
 const abandonedRouter = require("../controllers/routes/abandonedBoard")
@@ -38,7 +39,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 //? DB에 데이터 저장
 app.post('/', (req, res) => {
   const sql = "INSERT INTO missingboard SET ?"
-  con.query(sql, req.body, (err, row) => {
+  connection.query(sql, req.body, (err, row) => {
     if(err) throw err;
     console.log(row)
     res.send("완료")

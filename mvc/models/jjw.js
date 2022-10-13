@@ -1,10 +1,10 @@
-const con = mysql.createConnection({
-  host : 'localhost',
-  port : '3306',
+const con = {
+  host : '127.0.0.1',
+  port : '3333',
   user : 'root',
-  password : "kdt305",
-  database : 'project_c'
-})
+  password : "rjeek55%",
+  database : 'login'
+}
 
 const db = {...con}
 

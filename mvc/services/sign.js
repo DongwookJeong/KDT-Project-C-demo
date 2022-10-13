@@ -5,14 +5,8 @@ const mysql = require('mysql')
 const path = require("path")
 const bodyParser = require("body-parser")
 const { copyFileSync } = require("fs")
-const connection = mysql.createConnection({
-  host :'localhost',
-  port : "3306",
-  user: 'root',
-  password:'rzo01042218221@',
-  database:'node.js'
-})
-
+const connection = require("../models/jw.js")
+const db = mysql.createConnection(connection)
 let salt = 3.14102938
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
@@ -45,7 +39,7 @@ app.post('/',(req,res)=>{
   let hashPassword = crypto.createHash("sha512").update(saltPw).digest('base64')
 
   console.log(hashPassword)
-  connection.query(`insert into user(id,name,address,phone,password) values(${id},"${name}","${address}","${phone}","${hashPassword}");`, (err)=>{
+  db.query(`insert into user(id,name,address,phone,password) values(${id},"${name}","${address}","${phone}","${1}");`, (err)=>{
     if(err){
       console.error(err);
     }
@@ -76,7 +70,7 @@ app.post("/login",function(req,res){
   let hashPassword = crypto.createHash("sha512").update(saltPw).digest('base64')
 
 
-  connection.query(sql,(err,result)=>{
+  db.query(sql,(err,result)=>{
   let islogin = false;
     
     if(err){
@@ -84,14 +78,14 @@ app.post("/login",function(req,res){
     }
     console.log(body)
     result.forEach((item) => {
-      if(item.id == Number(body.id) && item.password == hashPassword){
+      if(item.id == Number(body.id) && item.password == 1){
         islogin = true
       }
     });
 
     if(islogin){
-      // res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
-      res.redirect("users")
+      res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
+      // res.redirect("users")
     }else{
       console.log(err)
     }
@@ -125,7 +119,7 @@ app.get("/idfind",function(req,res){
 app.post("/idFind", (req,res)=>{
     
   let body = req.body
-  connection.query("select * from user" , (err, results)=>{
+  db.query("select * from user" , (err, results)=>{
       if(err){
           console.error(err)
       }

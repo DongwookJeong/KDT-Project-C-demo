@@ -1,7 +1,7 @@
 const conn = {
   host     : 'localhost',
   user     : 'root',
-  password : 'kdt305',
+  password : 'rjeek55%',
   database : 'projectc',
   port : "3306",
 }
