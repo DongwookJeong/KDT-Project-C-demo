@@ -2,7 +2,11 @@ node_modules
 package-lock.json
 package.json
 key.js
+<<<<<<< HEAD
+jwDB.js
+=======
 jhDB.js
 jjwDB.js
 jwDB.js
 
+>>>>>>> 531f800e1385164faeb73f81f71c7370d83ede67
