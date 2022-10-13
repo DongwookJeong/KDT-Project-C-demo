@@ -90,19 +90,48 @@ app.post("/login",function(req,res){
     });
 
     if(islogin){
-      res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
-      // res.send("hi")
+      // res.sendFile(path.join(__dirname, "..", "views" ,"login2.html"))
+      res.redirect("users")
+    }else{
+      console.log(err)
+    }
+  })
+})
+app.get("/idfind",function(req,res){
+  res.sendFile(path.join(__dirname,"..","views","idfind.html"))
+})
+
+app.post("/idfind",function(req,res){
+  let body = req.body;
+  connection.query("select * from user;",(err,results)=>{
+    let idfinds = false
+    if(err){
+      console.log(err)
+    }
+    console.log(body)
+    results.forEach((items)=>{
+      if(items.name == body.name && items.phone == body.phone){
+        idfinds = true
+      }
+    })
+    if(idfinds){
+      res.redirect("users")
     }else{
       console.log(err)
     }
   })
 })
 
-// app.get("/users", (req, res)=>{
-//   connection.query("select * from user;", (err, results)=>{
-//   res.send(results)
-//   })
-// })
+  
+app.get("/users", (req, res)=>{
+  let body = req.body
+  connection.query("select id from user;", (err, results)=>{
+    results.forEach((items)=>{
+      if(items.name == body.name && items.phone == body.phone){
+      res.send(results)
+      }
+  })
+})
 
 app.listen(8000, ()=>{
   console.log("http://localhost:8000/")
